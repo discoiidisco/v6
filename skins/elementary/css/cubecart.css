@@ -189,6 +189,10 @@ input#coupon {
 }
 div#nav-actions {
    font-size: 0.8125rem;
+   text-transform: uppercase;
+}
+#box-session .or {
+    font-size: 0.5rem;
 }
 
 /* Start Checkout Progress */

@@ -11,7 +11,6 @@
  *}
 {if $CTRL_REVIEW}
 <div id="element-reviews">
-   <h2 id="reviews">{$LANG.catalogue.customer_reviews}</h2>
    <div id="review_read">
       {if $REVIEWS}
       <div class="pagination_top"><span class="pagination">{if isset($PAGINATION)}{$PAGINATION}{/if}</span>{$LANG.catalogue.average_rating}: <strong>{$REVIEW_AVERAGE}</strong></div>
@@ -38,7 +37,7 @@
          <div class="row">
             {if $review.gravatar_exists}
             <div class="small-3 medium-2 columns">
-               <a href="http://gravatar.com/emails/"><img class="th marg-right" src="{$review.gravatar_src}&s=90" align="left"></a>
+               <a href="http://gravatar.com/emails/"><img class="th marg-right" src="{$review.gravatar_src}&s=110" align="left"></a>
             </div>
             {/if}
             <div class="{if $review.gravatar_exists}small-9 medium-10{else}small-12{/if} columns">

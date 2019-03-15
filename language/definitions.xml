@@ -422,7 +422,8 @@
     <string name="product_doesnt_exist" introduced="5.0.0"><![CDATA[That product couldn't be found.]]></string>
     <string name="product_featured" introduced="6.0.10"><![CDATA[Include in featured products]]></string>
     <string name="product_id" introduced="5.0.0"><![CDATA[Product Id]]></string>
-    <string name="product_info" introduced="5.0.0"><![CDATA[Product Information]]></string>
+    <string name="product_info" introduced="6.3.0"><![CDATA[Detailed Description]]></string>
+    <string name="full_description" introduced="5.0.0"><![CDATA[Product Information]]></string>
     <string name="product_latest" introduced="5.0.0"><![CDATA[Include in latest products]]></string>
     <string name="product_name" introduced="5.0.0"><![CDATA[Product Name]]></string>
     <string name="product_not_reviewed" introduced="5.0.0"><![CDATA[This product hasn't been reviewed yet.]]></string>
@@ -2180,7 +2181,7 @@ This email is sent from the store's master email address but it is possible to r
     <string name="default_doc_title_returns" introduced="6.2.1"><![CDATA[Returns Policy]]></string>
     <string name="default_doc_content" introduced="5.0.0"><![CDATA[This can be managed under <span class="navTitle">Documents in the admin control panel.</span>]]></string>
     <string name="default_doc_content_welcome" introduced="5.0.0"><![CDATA[<ul class="bxslider">
-   <li><img src="skins/elementary/images/examples/slide1.jpg" title="Promotional Message One" /></li>
+   <li><img src="skins/elementary/images/examples/slide1.jpg" title="10% discount code: SAVE10" /></li>
    <li><img src="skins/elementary/images/examples/slide2.jpg" /></li>
 </ul>]]></string>
     <string name="db_host" introduced="5.0.0"><![CDATA[Database Host]]></string>

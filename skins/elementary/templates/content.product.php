@@ -11,22 +11,23 @@
  *}
 {if isset($PRODUCT) && $PRODUCT}
 <div itemscope itemtype="http://schema.org/Product">
-   <form action="{$VAL_SELF}" method="post" class="add_to_basket">
       <div class="row">
          <div class="small-12 columns">
             <h1 itemprop="name">{$PRODUCT.name}</h1>
          </div>
       </div>
+      <form action="{$VAL_SELF}" method="post" class="add_to_basket">
       {*
          Change include below to 'templates/element.product.horizontal_gallery.php'
          for horizontal gallery and vice versa.
       *}
       {include file='templates/element.product.vertical_gallery.php'}
-      <hr>
-      <dl class="tabs" data-tab data-options="scroll_to_content:false">
+      </form>
+      <dl class="tabs" data-tab data-options="scroll_to_content:false;deep_linking:true">
          {if !empty($PRODUCT.description)}
          <dd class="active"><a href="#product_info">{$LANG.catalogue.product_info}</a></dd>
          {/if}
+         <dd><a href="#reviews">{$LANG.catalogue.customer_reviews}</a></dd>
          <dd><a href="#product_spec">{$LANG.common.specification}</a></dd>
          {if isset($PRODUCT.discounts)}
          <dd><a href="#quantity_discounts">{$LANG.catalogue.quantity_discounts}</a></dd>
@@ -45,7 +46,13 @@
             {$PRODUCT.description}
          </div>
          {/if}
-         <div class="content{if empty($PRODUCT.description)} active{/if}" id="product_spec">
+         <div class="content{if empty($PRODUCT.description)} active{/if}" id="reviews">
+         {include file='templates/element.product_reviews.php'}
+         {foreach from=$COMMENTS item=html}
+         {$html}
+         {/foreach}
+         </div>
+         <div class="content" id="product_spec">
             <table>
                <tbody>
                   <tr>
@@ -129,18 +136,6 @@
             {/if}
         {/foreach}
       </div>
-   </form>
-   {if $SHARE}
-   <hr>
-   {foreach from=$SHARE item=html}
-   {$html}
-   {/foreach}
-   {/if}
-   <hr>
-   {include file='templates/element.product_reviews.php'}
-   {foreach from=$COMMENTS item=html}
-   {$html}
-   {/foreach}
 </div>
 <div class="hide" id="validate_field_required">{$LANG.form.field_required}</div>
 {else}

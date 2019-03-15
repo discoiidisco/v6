@@ -18,21 +18,19 @@
 {if $LATEST_PRODUCTS}
 <div id="content_latest_products">
    <h2 class="text-center">{$LANG.catalogue.latest_products}</h2>
-   <ul class="small-block-grid-1 medium-block-grid-4" data-equalizer>
+   <ul>
       {foreach from=$LATEST_PRODUCTS item=product}
       <li>
-         <div data-equalizer-watch>
-            <div class="text-center">
-               <a href="{$product.url}" title="{$product.name}"><img src="{$product.image}" alt="{$product.name}"></a>
-            </div>
-            <h3><a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a></h3>
-            {if $product.review_score && $CTRL_REVIEW}
-            <div class="rating"> {for $i = 1; $i <= 5; $i++}
-               {if $product.review_score >= $i} <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt=""> {elseif $product.review_score > ($i - 1) && $product.review_score < $i} <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt=""> {else} <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt=""> {/if}
-               {/for} 
-            </div>
-            {/if}
+         <div class="text-center">
+            <a href="{$product.url}" title="{$product.name}"><img src="{$product.image}" alt="{$product.name}"></a>
          </div>
+         <h3><a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a></h3>
+         {if $product.review_score && $CTRL_REVIEW}
+         <div class="rating"> {for $i = 1; $i <= 5; $i++}
+            {if $product.review_score >= $i} <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star.png" alt=""> {elseif $product.review_score > ($i - 1) && $product.review_score < $i} <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_half.png" alt=""> {else} <img src="{$STORE_URL}/skins/{$SKIN_FOLDER}/images/star_off.png" alt=""> {/if}
+            {/for} 
+         </div>
+         {/if}
          {if $product.ctrl_sale}
          <span class="old_price">{$product.price}</span> <span class="sale_price">{$product.sale_price}</span>
          {else}

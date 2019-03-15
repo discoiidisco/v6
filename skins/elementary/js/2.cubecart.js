@@ -1,6 +1,8 @@
 ;
 var validation_ini = {};
 jQuery(document).ready(function() {
+    $('.bxslider').bxSlider({auto:true,captions:true});
+    $('#content_latest_products ul').bxSlider({slideWidth:970,maxSlides:4,slideWidth:242});
     if($("#logo-text").length>0) {
         $("#logo-text").fitText();
         var top_header_height = document.getElementById('top_header').clientHeight;

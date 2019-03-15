@@ -22,7 +22,8 @@
    </div>
    <div class="small-7 medium-5 columns">
       {include file='templates/element.product.options.php'}
-      {include file='templates/element.product.review_score.php'}
       {include file='templates/element.product.call_to_action.php'}
+      {include file='templates/element.product.review_score.php'}
+      {include file='templates/element.product.share.php'}
    </div>
 </div>
