@@ -25,7 +25,7 @@
    {foreach from=$SUBCATS item=subcat}
    <li data-equalizer-watch>
       <a href="{$subcat.url}" title="{$subcat.cat_name}">
-        <img class="th" src="{$subcat.cat_image}" alt="{$subcat.cat_name}">
+        <img src="{$subcat.cat_image}" alt="{$subcat.cat_name}">
       </a>
       <br>
       <a href="{$subcat.url}" title="{$subcat.cat_name}"><small>{$subcat.cat_name}</small></a>
@@ -67,10 +67,10 @@
    <ul class="small-block-grid-1 product_list" data-equalizer>
       {foreach from=$PRODUCTS item=product}
       <li>
-         <form action="{$VAL_SELF}" method="post" class="panel add_to_basket">
+         <form action="{$VAL_SELF}" method="post" class="add_to_basket">
             <div class="row product_list_view">
                <div class="small-3 columns">
-                  <a href="{$product.url}" class="th" title="{$product.name}">
+                  <a href="{$product.url}" title="{$product.name}">
                   <img src="{$product.thumbnail}" alt="{$product.name}">
                   </a>
                </div>
@@ -131,7 +131,7 @@
             <div class="product_grid_view hide">
                <div data-equalizer-watch>
                   <div class="text-center">
-                     <a href="{$product.url}" title="{$product.name}"><img class="th" src="{$product.thumbnail}" alt="{$product.name}"></a>
+                     <a href="{$product.url}" title="{$product.name}"><img src="{$product.thumbnail}" alt="{$product.name}"></a>
                   </div>
                   <h3><a href="{$product.url}" title="{$product.name}">{$product.name|truncate:38:"&hellip;"}</a></h3>
                   {if $product.review_score}

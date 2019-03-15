@@ -81,7 +81,7 @@
    <ul class="small-block-grid-5 no-bullet">
       {foreach from=$RELATED item=product}
       <li>
-         <a href="{$product.url}" title="{$product.name}"><img src="{$product.img_src}" class="th" alt="{$product.name}"></a>
+         <a href="{$product.url}" title="{$product.name}"><img src="{$product.img_src}" alt="{$product.name}"></a>
          <br>
          <a href="{$product.url}" title="{$product.name}">{$product.name}</a>
          <p>

@@ -2,7 +2,8 @@
                             'skins/{$SKIN_FOLDER}/js/vendor/jquery.validate.js',
                             'skins/{$SKIN_FOLDER}/js/vendor/jquery.cookie.js',
                             'skins/{$SKIN_FOLDER}/js/vendor/jquery.bxslider.js',
-                            'skins/{$SKIN_FOLDER}/js/vendor/jquery.chosen.js']}
+                            'skins/{$SKIN_FOLDER}/js/vendor/jquery.chosen.js',
+                            'skins/{$SKIN_FOLDER}/js/vendor/jquery.fittext.js']}
 {foreach from=$BODY_JS item=js}
     {$js_foot[] = $js}
 {/foreach}

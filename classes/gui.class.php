@@ -1744,7 +1744,7 @@ class GUI
         }
 
         if (empty($this->_skin)) {
-            $this->_skin = 'foundation';
+            $this->_skin = 'elementary';
             $GLOBALS['config']->set('config', 'skin_folder'.$this->_skin_config_postfix, $this->_skin);
         }
 

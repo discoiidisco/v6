@@ -33,10 +33,16 @@
             {include file='templates/box.off_canvas.left.php'}
             {include file='templates/box.eu_cookie.php'}
             <div class="row marg-top" id="top_header">
-               <div class="small-4 large-3 columns">
-                  <a href="{$ROOT_PATH}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$CONFIG.store_name}"></a>
+               <div class="small-4 large-6 columns">
+                  <a href="{$ROOT_PATH}" class="main-logo">
+                  {if $STORE_LOGO|strstr:'default.png'}
+                  <div id="logo-text">{$CONFIG.store_name}</div>
+                  {else}
+                  <img src="{$STORE_LOGO}" alt="{$CONFIG.store_name}">
+                  {/if}
+                  </a>
                </div>
-               <div class="small-8 large-9 columns nav-boxes">
+               <div class="small-8 large-6 columns nav-boxes">
                   <div class="row" id="nav-actions">
                      <div class="small-12 columns">
                         <div class="right text-center">{include file='templates/box.basket.php'}</div>
@@ -68,30 +74,38 @@
                </div>
             </div>
             <div class="row {$SECTION_NAME}_wrapper">
-               <div class="small-12 large-9 columns" id="main_content">
+               <div class="small-12 columns" id="main_content">
                   {include file='templates/box.errors.php'}
                   {include file='templates/box.progress.php'}
                   {$PAGE_CONTENT}
                </div>
+               {*
                <div class="large-3 columns show-for-large-up" id="sidebar_left">
                   {include file='templates/box.featured.php'}
                   {include file='templates/box.popular.php'}
                   {include file='templates/box.sale_items.php'}
                </div>
+               *}
                <a href="#" class="back-to-top"><span class="show-for-small-only"><svg class="icon"><use xlink:href="#icon-angle-up"></use></svg></span><span class="show-for-medium-up"><svg class="icon"><use xlink:href="#icon-angle-up"></use></svg> {$LANG.common.top}</span></a>
             </div>
             <footer>
                <div class="row">
                   <div class="medium-7 large-7 columns">
                      {include file='templates/box.documents.php'}
-                     <div class="show-for-medium-up">{$COPYRIGHT}</div>
+                     <div class="show-for-medium-up">
+                        {$COPYRIGHT}
+                        {include file='templates/ccpower.php'}
+                     </div>
                   </div>
                   <div class="medium-5 large-5 columns">
                      {$SOCIAL_LIST}
                      <div class="row collapse">
                         <div class="large-12 columns">
                            {include file='templates/box.newsletter.php'}
-                           <div class="show-for-small-only">{$COPYRIGHT}</div>
+                           <div class="show-for-small-only">
+                              {$COPYRIGHT}
+                              {include file='templates/ccpower.php'}
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -102,7 +116,6 @@
             {$DEBUG_INFO}
             {include file='templates/box.skins.php'}
             <a class="exit-off-canvas"></a>
-            {include file='templates/ccpower.php'}
          </div>
       </div>
       {include file='templates/element.markup.json-ld.php'}

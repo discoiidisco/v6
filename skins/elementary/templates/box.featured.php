@@ -12,7 +12,7 @@
 {if $featured}
 <div class="panel" id="box-featured">
    <h3>{$LANG.catalogue.title_feature}</h3>
-   <a class="th" href="{$featured.url}" title="{$featured.name}">
+   <a href="{$featured.url}" title="{$featured.name}">
    <img src="{$featured.image}" alt="{$featured.name}">
    </a>
    <h4><a href="{$featured.url}" title="{$featured.name}">{$featured.name}</a></h4>

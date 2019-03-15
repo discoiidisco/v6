@@ -345,7 +345,7 @@
     <string name="importing_progress" introduced="6.0.0"><![CDATA[Imported %s of %s &hellip;]]></string>
     <string name="imported_products" introduced="5.0.0"><![CDATA[Imported Products]]></string>
     <string name="is_digital" introduced="5.0.0"><![CDATA[Is Digital Download]]></string>
-    <string name="latest_products" introduced="5.0.0"><![CDATA[Latest Products]]></string>
+    <string name="latest_products" introduced="5.0.0"><![CDATA[New Items]]></string>
     <string name="login_to_view" introduced="5.0.0"><![CDATA[Login to view price]]></string>
     <string name="manufacturer" introduced="5.0.0"><![CDATA[Manufacturer]]></string>
     <string name="master_caregory_id" introduced="5.0.0"><![CDATA[Category (ID or Name - Comma Separated)]]></string>
@@ -627,7 +627,7 @@
     <string name="top" introduced="6.0.0"><![CDATA[Top]]></string>
     <string name="loading" introduced="6.0.0"><![CDATA[Loading]]></string>
     <string name="signup" introduced="6.0.0"><![CDATA[Signup]]></string>
-    <string name="follow_us" introduced="6.0.0"><![CDATA[Follow Us]]></string>
+    <string name="follow_us" introduced="6.0.0"><![CDATA[Follow]]></string>
     <string name="account" introduced="6.0.0"><![CDATA[Account]]></string>
     <string name="invoice" introduced="6.0.0"><![CDATA[Invoice]]></string>
     <string name="min" introduced="6.0.0"><![CDATA[Min]]></string>
@@ -706,7 +706,7 @@
     <string name="home" introduced="5.0.0"><![CDATA[Home]]></string>
     <string name="import" introduced="5.0.0"><![CDATA[Import]]></string>
     <string name="info" introduced="5.0.0"><![CDATA[Info]]></string>
-    <string name="information" introduced="5.0.0"><![CDATA[Information]]></string>
+    <string name="information" introduced="5.0.0"><![CDATA[Info]]></string>
     <string name="installed" introduced="5.0.0"><![CDATA[Installed]]></string>
     <string name="ip_address" introduced="5.0.0"><![CDATA[IP Address]]></string>
     <string name="items" introduced="5.0.0"><![CDATA[Item(s)]]></string>
@@ -2180,11 +2180,9 @@ This email is sent from the store's master email address but it is possible to r
     <string name="default_doc_title_returns" introduced="6.2.1"><![CDATA[Returns Policy]]></string>
     <string name="default_doc_content" introduced="5.0.0"><![CDATA[This can be managed under <span class="navTitle">Documents in the admin control panel.</span>]]></string>
     <string name="default_doc_content_welcome" introduced="5.0.0"><![CDATA[<ul class="bxslider">
-   <li><img src="skins/foundation/images/examples/slide1.jpg" title="Promotional Message One" /></li>
-   <li><img src="skins/foundation/images/examples/slide2.jpg" /></li>
-   <li><img src="skins/foundation/images/examples/slide3.jpg" title="Promotional Message Two" /></li>
-</ul>
-<p>This message and the slider above (including the images) can be edited using the <strong><span style="color: red;">Rich</span> <span style="color: blue;">Text</span> <span style="color: green;">Editor</span></strong> which can be found in the admin control panel of your store under <i>File Manager &gt; Documents</i>.</p>]]></string>
+   <li><img src="skins/elementary/images/examples/slide1.jpg" title="Promotional Message One" /></li>
+   <li><img src="skins/elementary/images/examples/slide2.jpg" /></li>
+</ul>]]></string>
     <string name="db_host" introduced="5.0.0"><![CDATA[Database Host]]></string>
     <string name="db_name" introduced="5.0.0"><![CDATA[Database Name]]></string>
     <string name="db_prefix" introduced="5.0.0"><![CDATA[Table Prefix]]></string>

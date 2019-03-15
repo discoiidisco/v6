@@ -1,4 +1,4 @@
-<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type='text/css'>
+<link href="//fonts.googleapis.com/css?family=Playball|Roboto:400,700" rel="stylesheet" type='text/css'>
 {assign var=css_input value=[   'skins/{$SKIN_FOLDER}/css/normalize.css',
                                 'skins/{$SKIN_FOLDER}/css/foundation.css',
                                 'skins/{$SKIN_FOLDER}/css/cubecart.css',

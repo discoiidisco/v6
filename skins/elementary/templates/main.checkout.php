@@ -54,13 +54,17 @@
                <div class="row">
                   <div class="medium-7 large-7 columns">
                      {include file='templates/box.documents.php'}
-                     <div class="show-for-medium-up">{$COPYRIGHT}</div>
+                     <div class="show-for-medium-up">
+                        {$COPYRIGHT}
+                        {include file='templates/ccpower.php'}
+                     </div>
                   </div>
                   <div class="medium-5 large-5 columns">
                      {$SOCIAL_LIST}
                      <div class="show-for-small-only row collapse">
                         <div class="large-12 columns">
                            {$COPYRIGHT}
+                           {include file='templates/ccpower.php'}
                         </div>
                      </div>
                   </div>
@@ -71,7 +75,6 @@
             {$DEBUG_INFO}
             {$SKIN_SELECT}
             <a class="exit-off-canvas"></a>
-            {include file='templates/ccpower.php'}
          </div>
       </div>
       {include file='templates/element.markup.json-ld.php'}

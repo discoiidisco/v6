@@ -1,6 +1,15 @@
 ;
 var validation_ini = {};
 jQuery(document).ready(function() {
+    if($("#logo-text").length>0) {
+        $("#logo-text").fitText();
+        var top_header_height = document.getElementById('top_header').clientHeight;
+        var logo_height = document.getElementById('logo-text').clientHeight;
+        if(top_header_height>logo_height) {
+            var logo_padding = (top_header_height - logo_height) / 2;
+            $('#logo-text').css("padding-top", logo_padding+'px');
+        }
+    }
     if($('a.open-clearing img#img-preview').length) {
         var ip = $('a.open-clearing img#img-preview');
         var ip_height = ip.height();

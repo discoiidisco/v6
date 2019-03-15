@@ -108,7 +108,7 @@ $default_config_settings = array(
   'catalogue_mode' => '0',
   'debug' => '0',
   'admin_skin' => 'default',
-  'skin_folder' => 'foundation',
+  'skin_folder' => 'elementary',
   'skin_style' => 'default',
   'skin_change' => '0',
   'default_rss_feed' => 'https://forums.cubecart.com/forum/1-news-announcements.xml',
@@ -476,7 +476,7 @@ if (!isset($_SESSION['setup']) || is_null($_SESSION['setup'])) {
 
             ## Redefine the default skin
             $reset      = array(
-        'skin_folder' => 'foundation',
+        'skin_folder' => 'elementary',
         'skin_style' => 'default',
         'default_language' => $default_language
       );
