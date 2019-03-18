@@ -14,7 +14,6 @@
       <a href="#" class="open-clearing" data-thumb-index="0"><img src="{$PRODUCT.medium}" alt="{$PRODUCT.name}" id="img-preview"></a>
       <p class="show-for-small-only">{if $image@total==1}{$LANG.catalogue.tap_enlarge}{else}{$LANG.catalogue.tap_gallery}{/if}</p>
    </div>
-   {debug}
    {if count($GALLERY)>1}
    <div  class="medium-1 columns thinpad-right off-canvas-for-small vertical">
       <div id="scrollUp" class="scroller"><svg class="icon"><use xlink:href="#icon-angle-up"></use></svg></div>
