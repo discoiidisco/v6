@@ -707,7 +707,7 @@
     <string name="home" introduced="5.0.0"><![CDATA[Home]]></string>
     <string name="import" introduced="5.0.0"><![CDATA[Import]]></string>
     <string name="info" introduced="5.0.0"><![CDATA[Info]]></string>
-    <string name="information" introduced="5.0.0"><![CDATA[Info]]></string>
+    <string name="information" introduced="5.0.0"><![CDATA[Information]]></string>
     <string name="installed" introduced="5.0.0"><![CDATA[Installed]]></string>
     <string name="ip_address" introduced="5.0.0"><![CDATA[IP Address]]></string>
     <string name="items" introduced="5.0.0"><![CDATA[Item(s)]]></string>

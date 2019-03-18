@@ -10,7 +10,7 @@
  * License:  GPL-3.0 https://www.gnu.org/licenses/quick-guide-gplv3.html
  *}
 {if $PRODUCT.review_score && $CTRL_REVIEW}
-<p itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+<p itemprop="aggregateRating" class="nomarg" itemscope itemtype="http://schema.org/AggregateRating">
    <meta itemprop="ratingValue" content="{$REVIEW_AVERAGE}">
    <meta itemprop="reviewCount" content="{$REVIEW_COUNT}">
    <meta itemprop="bestRating" content="5"/>

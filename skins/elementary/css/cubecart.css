@@ -274,14 +274,14 @@ ul.item_options {
 	bottom: 4em;
 	right: 0px;
 	text-decoration: none;
-	color: #000 !important;
-	background-color: #EBEBEB;
+	color: #FFFFFF !important;
+	background-color: #777777;
 	padding: 0.5em 1em;
 	display: none;
 	z-index: 100;
 }
 a.back-to-top, a.back-to-top:hover, a.back-to-top:active, a.back-to-top:visited  {
-    color: #000 !important;
+    color: #FFFFFF !important;
 }
 .button.white {
 	background-color: transparent;
