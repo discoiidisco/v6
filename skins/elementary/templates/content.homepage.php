@@ -15,6 +15,7 @@
     {$DOCUMENT.content}
 </div>
 {/if}
+{include file='templates/box.popular.php'}
 {if $LATEST_PRODUCTS}
 <div id="content_latest_products">
    <h2 class="text-center">{$LANG.catalogue.latest_products}</h2>
