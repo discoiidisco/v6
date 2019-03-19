@@ -1,7 +1,7 @@
 ;
 var validation_ini = {};
 jQuery(document).ready(function() {
-    $('.bxslider').bxSlider({auto:true,captions:true});
+    $('.bxslider').bxSlider({auto:true,captions:true,preloadImages:'all',mode:'fade'});
     $('#content_popular_products ul, #content_latest_products ul').bxSlider({slideWidth:970,maxSlides:4,slideWidth:242});
     if($("#logo-text").length>0) {
         $("#logo-text").fitText();

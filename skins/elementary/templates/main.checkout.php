@@ -29,10 +29,16 @@
             {include file='templates/box.off_canvas.left.php'}
             {include file='templates/box.eu_cookie.php'}
             <div class="row marg-top" id="top_header">
-               <div class="small-4 large-3 columns">
-                  <a href="{$ROOT_PATH}" class="main-logo"><img src="{$STORE_LOGO}" alt="{$CONFIG.store_name}"></a>
+               <div class="small-4 large-6 columns">
+                  <a href="{$ROOT_PATH}" class="main-logo">
+                  {if $STORE_LOGO|strstr:'default.png'}
+                  <div id="logo-text">{$CONFIG.store_name}</div>
+                  {else}
+                  <img src="{$STORE_LOGO}" alt="{$CONFIG.store_name}">
+                  {/if}
+                  </a>
                </div>
-               <div class="small-8 large-9 columns">
+               <div class="small-8 large-6 columns">
                   <div class="row" id="nav-actions">
                      <div class="small-12 columns">
                         <div class="right text-center show-for-small"><a class="left-off-canvas-toggle button white tiny" href="#"><svg class="icon icon-x2"><use xlink:href="#icon-bars"></use></svg></a></div>
