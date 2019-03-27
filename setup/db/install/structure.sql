@@ -305,6 +305,7 @@ CREATE TABLE IF NOT EXISTS `CubeCart_downloads` (
 
 CREATE TABLE IF NOT EXISTS `CubeCart_email_content` (
 	`content_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`status` ENUM('1','0') NOT NULL DEFAULT '1',
 	`description` VARCHAR(255) NOT NULL DEFAULT '',
 	`content_type` VARCHAR(70) NOT NULL,
 	`language` VARCHAR(5) NOT NULL,
@@ -313,7 +314,8 @@ CREATE TABLE IF NOT EXISTS `CubeCart_email_content` (
 	`content_text` TEXT NOT NULL,
 	PRIMARY KEY (`content_id`),
 	KEY `content_type` (`content_type`),
-	KEY `language` (`language`)
+	KEY `language` (`language`),
+	KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 
 CREATE TABLE IF NOT EXISTS `CubeCart_email_template` (

@@ -671,7 +671,8 @@ if (isset($database_result) && $database_result) {
         'cubecart_email_content' => array(
             'content_id' => 'PRIMARY',
             'content_type' => 'KEY',
-            'language' => 'KEY'
+            'language' => 'KEY',
+            'status' => 'KEY'
         ),
         'cubecart_email_template' => array(
             'template_id' => 'PRIMARY'

@@ -99,7 +99,7 @@ class Mailer extends PHPMailer\PHPMailer\PHPMailer
         $language = ($language == 'en') ? 'en-GB' : $language;
 
         if (!empty($content_type)) {
-            $where = array('content_type' => (string)$content_type, 'language' => $language);
+            $where = array('content_type' => (string)$content_type, 'language' => $language, 'status' => '1');
             if ($panic) { // Default language doesn't have this content type!
                 unset($where['language']);
             }
@@ -163,6 +163,9 @@ class Mailer extends PHPMailer\PHPMailer\PHPMailer
      */
     public function sendEmail($email = false, $contents = false, $template_id = false)
     {
+        if(empty($contents)) {
+            return false;
+        }
         foreach ($GLOBALS['hooks']->load('class.mailer.send') as $hook) {
             include $hook;
         }

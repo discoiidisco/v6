@@ -110,6 +110,7 @@
 	<h3>{$ADD_EDIT_CONTENT}</h3>
 	{if $LANGUAGES}
 	<fieldset>
+		<div><label for="content_status">{$LANG.common.enabled}</label><span><input type="hidden" name="content[status]" id="content_status" value="{$CONTENT.status}" class="toggle"></span></div>
 	  <div><label for="content_subject">{$LANG.common.subject}</label><span><input type="text" name="content[subject]" id="content_subject" value="{$CONTENT.subject}" class="textbox"></span></div>
 	  <div><label for="content_language">{$LANG.common.language}</label><span><select name="content[language]" id="content_language" class="textbox">
 	  {foreach from=$LANGUAGES item=language}<option value="{$language.code}"{$language.selected}>{$language.title}</option>{/foreach}
