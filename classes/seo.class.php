@@ -347,7 +347,7 @@ class SEO
      */
     public function getdbPath($type, $item_id)
     {
-        if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type, 'item_id' => $item_id))) !== false) {
+        if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type, 'item_id' => $item_id, 'perm_redirect' => 0))) !== false) {
             return $item[0]['path'];
         } else {
             return '';
@@ -674,15 +674,27 @@ class SEO
                 }
                 // try to generate
                 $path = $this->generatePath($item_id, $type);
-
                 $custom = 0;
             }
 
             if (empty($path)) {
                 return ($bool) ? false : '';
             }
-            if (($existing = $GLOBALS['db']->select('CubeCart_seo_urls', 'id', array('type' => $type, 'item_id' => $item_id), false, 1, false, false)) !== false) {
-                $GLOBALS['db']->update('CubeCart_seo_urls', array('type' => $type, 'item_id' => $item_id, 'path' => $path, 'custom' => $custom), array('id' => $existing[0]['id']));
+            $existing = $GLOBALS['db']->select('CubeCart_seo_urls', array('id', 'path'), array('type' => $type, 'item_id' => $item_id), false, false, false, false);
+            if ($existing) {
+                $match = false;
+                foreach($existing as $e) {
+                    if($e['path']==$path) {
+                        $match = true;
+                        $GLOBALS['db']->update('CubeCart_seo_urls', array('perm_redirect' => 0), array('id' => $e['id']));
+                        echo "matched";
+                    } else {
+                        $GLOBALS['db']->update('CubeCart_seo_urls', array('perm_redirect' => 1), array('id' => $e['id']));
+                    }
+                }
+                if(!$match) {
+                    $GLOBALS['db']->insert('CubeCart_seo_urls', array('perm_redirect' => 0, 'type' => $type, 'item_id' => $item_id, 'path' => $path, 'custom' => $custom));
+                }
             } else {
                 // Check for duplicate path
                 if (!$GLOBALS['db']->select('CubeCart_seo_urls', false, array('path' => $path), false, 1, false, false)) {

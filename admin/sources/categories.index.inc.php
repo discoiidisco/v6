@@ -82,7 +82,6 @@ if (isset($_POST['cat']) && is_array($_POST['cat']) && Admin::getInstance()->per
                     $_POST['seo_path'] = substr($_POST['seo_path'], 1);
                 }
                 if (empty($_POST['seo_path'])) {
-                    $GLOBALS['seo']->delete('cat', $cat_id);
                     $GLOBALS['seo']->rebuildCategoryList(); // clear previous entry from SEO class before generating new path
                 }
                 $GLOBALS['seo']->setdbPath('cat', $cat_id, $_POST['seo_path'], false, false);
