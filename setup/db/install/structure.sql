@@ -964,7 +964,8 @@ CREATE TABLE IF NOT EXISTS `CubeCart_seo_urls` (
   KEY `id` (`id`),
   KEY `type` (`type`),
   KEY `item_id` (`item_id`),
-  KEY `custom` (`custom`)
+  KEY `custom` (`custom`),
+  KEY `perm_redirect` (`perm_redirect`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1; #EOQ
 
 CREATE TABLE IF NOT EXISTS `CubeCart_email_log` (
