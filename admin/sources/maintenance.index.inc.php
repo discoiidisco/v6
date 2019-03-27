@@ -901,7 +901,7 @@ if (isset($database_result) && $database_result) {
             'type' => 'KEY',
             'item_id' => 'KEY',
             'custom' => 'KEY',
-            'perm_redirect' => 'KEY'
+            'redirect' => 'KEY'
         ),
         'cubecart_email_log' => array(
             'id' => 'PRIMARY'
