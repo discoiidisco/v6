@@ -21,7 +21,23 @@ $GLOBALS['gui']->addBreadcrumb($lang['settings']['redirects'], currentPage());
 $GLOBALS['main']->addTabControl($lang['settings']['redirects'], 'redirects');
 
 if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
-
+    if(isset($_POST['path']) && !empty($_POST['path']) && isset($_POST['item_id']) && !empty($_POST['item_id']) && ctype_digit($_POST['item_id'])) {
+        // Check product, category, doc exists
+        $exists = false;
+        switch($_POST['type']) {
+            case 'prod':
+                $exists = $GLOBALS['db']->select('CubeCart_inventory', false, array('product_id' => (int)$_POST['item_id']));
+            break;
+            case 'cat':
+                $exists = $GLOBALS['db']->select('CubeCart_category', false, array('cat_id' => (int)$_POST['item_id']));
+            break;
+            case 'doc':
+                $exists = $GLOBALS['db']->select('CubeCart_category', false, array('doc_id' => (int)$_POST['item_id']));
+        }
+        if($exists) {
+            $GLOBALS['seo']->setdbPath($_POST['type'], (int)$_POST['item_id'], $_POST['path'], true, false, $_POST['redirect']);
+        }
+    }
 }
 if (Admin::getInstance()->permissions('settings', CC_PERM_DELETE)) {
 
