@@ -43,7 +43,7 @@ class SEO
      *
      * @var string
      */
-    private $_extension   = '.html';
+    private $_extension   = '';
     /**
      * Ignored URL sections
      *
@@ -110,6 +110,8 @@ class SEO
         }
 
         self::_checkModRewrite();
+
+        $this->_extension = $GLOBALS['config']->get('config', 'seo_ext');
 
         // Build an array of ALL categories
         $this->_getCategoryList();
@@ -913,7 +915,7 @@ IndexIgnore *
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !=/favicon.ico
-  RewriteRule ^(.*)\.html?$ index.php?seo_path=$1 [L,QSA]
+  RewriteRule ^(.*)?$ index.php?seo_path=$1 [L,QSA]
 </IfModule>
 
 ### Default store 404 page ###
@@ -1080,9 +1082,9 @@ ErrorDocument 404 '.CC_ROOT_REL.'index.php
     {
         $url = trim($url);
         $url = function_exists('mb_strtolower') ? mb_strtolower($url) : strtolower($url);
-        $url = preg_replace("/\.\w{2,4}$/", '', $url);
+        //$url = preg_replace("/\.\w{2,4}$/", '', $url);
         $url = str_replace(' ', '-', html_entity_decode($url, ENT_QUOTES));
-        $url = preg_replace('#[^\w\-_/]#iuU', '-', str_replace('/', '/', $url));
+        $url = preg_replace('#[^\w\-._/]#iuU', '-', str_replace('/', '/', $url));
         $url = preg_replace(array('#/{2,}#iu', '#-{2,}#'), array('/', '-'), $url);
         return trim($url, '-');
     }

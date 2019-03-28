@@ -293,9 +293,13 @@
          <select name="config[seo_add_cats]" id="seo_add_cats" class="textbox">
             {foreach from=$OPT_SEO_ADD_CATS item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
             </select></span></div>
-         <div><label for="seo_cat_add_cats">{$LANG.settings.seo_cat_add_cats}</label><span>
+            <div><label for="seo_cat_add_cats">{$LANG.settings.seo_cat_add_cats}</label><span>
          <select name="config[seo_cat_add_cats]" id="seo_cat_add_cats" class="textbox">
             {foreach from=$OPT_SEO_CAT_ADD_CATS item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
+            </select></span></div>
+            <div><label for="seo_ext">{$LANG.settings.seo_ext}</label><span>
+         <select name="config[seo_ext]" id="seo_ext" class="textbox">
+            {foreach from=$OPT_SEO_EXT item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
             </select></span></div>
       </fieldset>
       <fieldset>
