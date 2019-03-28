@@ -376,9 +376,7 @@ class SEO
         if (!empty($path)) {
             if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', false, array('path' => $path))) !== false) {
                 if(in_array($item[0]['redirect'],array('301','302'))) {
-                    $path = $this->getdbPath($item[0]['type'], $item[0]['item_id']);
-                    $extension = $this->hasExtension($path) ? '' : $this->_extension;
-                    httpredir($GLOBALS['storeURL'].'/'.$path.$extension, '', false, (int)$item[0]['redirect']);
+                    httpredir($GLOBALS['storeURL'].'/'.$this->getdbPath($item[0]['type'], $item[0]['item_id']), '', false, (int)$item[0]['redirect']);
                 }
                 $item_vars = $this->_getItemVars($item[0]['type'], $item[0]['item_id']);
                 foreach ($GLOBALS['hooks']->load('class.seo.getitem.parameters') as $hook) {
