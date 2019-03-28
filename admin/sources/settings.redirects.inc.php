@@ -35,7 +35,13 @@ if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
                 $exists = $GLOBALS['db']->select('CubeCart_category', false, array('doc_id' => (int)$_POST['item_id']));
         }
         if($exists) {
-            $GLOBALS['seo']->setdbPath($_POST['type'], (int)$_POST['item_id'], $_POST['path'], true, false, $_POST['redirect']);
+            if($GLOBALS['seo']->setdbPath($_POST['type'], (int)$_POST['item_id'], $_POST['path'], true, false, $_POST['redirect'])) {
+                $GLOBALS['main']->successMessage($lang['notification']['notify_success_add_redirect']);
+            } else {
+                $GLOBALS['main']->errorMessage($lang['notification']['notify_fail_add_redirect']);
+            }
+        } else {
+            $GLOBALS['main']->errorMessage($lang['notification']['notify_object_not_found']);
         }
     }
 }

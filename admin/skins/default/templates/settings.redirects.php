@@ -59,10 +59,10 @@
                {/if}
                </td>
                <td align="center">
-               {if empty($redirect.id)}
+               {if empty($redirect.item_id)}
                {$lang.common.na}
                {else}
-               {$redirect.id}
+               {$redirect.item_id}
                {/if}</td>
                <td align="center">{$redirect.redirect}</td>
                <td align="center"><a href="?_g=settings&node=redirects&delete={$redirect.id}" class="delete" title="{$LANG.notification.confirm_delete}"><i class="fa fa-trash" title="{$LANG.common.delete}"></i></td>
