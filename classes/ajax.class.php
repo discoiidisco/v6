@@ -66,6 +66,9 @@ class Ajax
             case 'subscriber_log':
                 $return_data = self::subscriberLog();
             break;
+            case 'seopath':
+                $return_data = self::seopath($_GET['type'], $_GET['item_id']);
+            break;
             case 'search':
             default:
                 $return_data = self::search($type, $string);
@@ -83,6 +86,11 @@ class Ajax
     public static function filesize($path, $total)
     {
         return json_encode(dirsize(CC_ROOT_DIR.'/'.$path, $total));
+    }
+
+    public static function seopath($type, $item_id)
+    {
+        return json_encode($GLOBALS['seo']->getdbPath($type, $item_id));
     }
 
     /**

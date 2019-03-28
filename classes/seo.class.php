@@ -176,14 +176,14 @@ class SEO
 
         if (!$item_id && in_array($type, $this->_static_sections)) {
             if (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type))) !== false) {
-                return $url.$item[0]['path'].$this->_extension;
+                return $url.$item[0]['path'];
             } else {
-                return  $url.$this->setdbPath($type, '', '', false).$this->_extension;
+                return  $url.$this->setdbPath($type, '', '', false);
             }
         } elseif (($item = $GLOBALS['db']->select('CubeCart_seo_urls', array('path'), array('type' => $type, 'item_id' => $item_id))) !== false) {
-            return $url.$item[0]['path'].$this->_extension;
+            return $url.$item[0]['path'];
         } else {
-            return  $url.$this->setdbPath($type, $item_id, '', false).$this->_extension;
+            return  $url.$this->setdbPath($type, $item_id, '', false);
         }
     }
 
@@ -678,7 +678,7 @@ class SEO
                     }
                 }
                 // try to generate
-                $path = $this->generatePath($item_id, $type);
+                $path = $this->generatePath($item_id, $type, null, false, true);
                 $custom = 0;
             }
 
