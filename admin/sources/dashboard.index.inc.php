@@ -172,7 +172,6 @@ if (Admin::getInstance()->permissions('statistics', CC_PERM_READ, false, false))
     $last_month   = date('m', strtotime("-1 month", mktime(12, 0, 0, $this_month, 15, $this_year)));
     $last_year    = ($last_month < $this_month) ? $this_year : ($this_year - 1);
     $last_month_start  = mktime(0, 0, 0, $last_month, '01', $last_year);
-    $last_year_start   = mktime(0, 0, 0, '01', '01', $this_year - 1);
 
     $last_month_sales  = $GLOBALS['db']->query('SELECT SUM(`total`) as `last_month` FROM `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_summary` WHERE `status` in(2,3) AND `order_date` > '.$last_month_start.' AND `order_date` < '.$this_month_start.';');
     $quick_stats['last_month'] = Tax::getInstance()->priceFormat((float)$last_month_sales[0]['last_month']);
@@ -183,33 +182,42 @@ if (Admin::getInstance()->permissions('statistics', CC_PERM_READ, false, false))
     $GLOBALS['smarty']->assign('QUICK_STATS', $quick_stats);
 
     ## Statistics (Google Charts)
-    $sales = $GLOBALS['db']->select('CubeCart_order_summary', array('order_date', 'total'), array('order_date' => '>='.$last_year_start, 'status' => array(2, 3), 'total' => '>0'));
+    $sales = $GLOBALS['db']->select('CubeCart_order_summary', array('order_date', 'total'), array('status' => array(2, 3), 'total' => '>0'));
     $data= array();
     if ($sales) { ## Get data to put in chart
+        $chart_data['data'] = "['Month',";
+        $years = array();
         foreach ($sales as $sale) {
             $year = date('Y', $sale['order_date']);
+            if(count($years)==0) {
+                $min_year = $year;
+            }
+            if(!isset($years[$year])) {
+                $chart_data['data'] .= "'$year',";
+                $years[$year] = $year;
+            }
             $month = date('M', $sale['order_date']);
             if (isset($data[$year][$month])) {
                 $data[$year][$month] += sprintf('%0.2f', $sale['total']);
             } else {
                 $data[$year][$month] = sprintf('%0.2f', $sale['total']);
             }
+            $max_year = $year;
         }
+        $chart_data['data'] .= "],";
     }
-
-    $this_year = date('Y');
-    $last_year = $this_year - 1;
-
-    $chart_data['data'] = "['Month', '$this_year', '$last_year'],";
 
     for ($month = 1; $month <= 12; $month++) {
         $m = date("M", mktime(0, 0, 0, $month, 10));
-        $last_year_month = (isset($data[$last_year][$m]) && $data[$last_year][$m]>0) ? $data[$last_year][$m] : 0;
-        $this_year_month = (isset($data[$this_year][$m]) && $data[$this_year][$m]>0) ? $data[$this_year][$m] : 0;
-        $chart_data['data'] .= "['$m',  $this_year_month, $last_year_month],";
+        $chart_data['data'] .= "['$m',";
+        foreach($years as $year) {
+            $chart_data['data'] .= (isset($data[$year][$m]) && $data[$year][$m]>0) ? (string)$data[$year][$m] : '0';
+            if($year!==$max_year) { $chart_data['data'] .= ','; }
+        }
+        $chart_data['data'] .= "],";
     }
 
-    $chart_data['title'] = $lang['dashboard']['title_sales_stats'].': '.$last_year.' - '.$this_year;
+    $chart_data['title'] = $lang['dashboard']['title_sales_stats'].': '.$min_year.' - '.$max_year;
     $GLOBALS['smarty']->assign('CHART', $chart_data);
 }
 ## Last 5 orders
