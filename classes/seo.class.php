@@ -451,6 +451,20 @@ class SEO
     }
 
     /**
+     * Get items redirects
+     *
+     * @param string $type
+     * @param string $item_id
+     */
+    public function getRedirects($type, $item_id)
+    {
+        if(ctype_digit($item_id) && !empty($type)) {
+            return $GLOBALS['db']->select('CubeCart_seo_urls', false, array('type'=> $type, 'item_id' => $item_id, 'redirect' => '> 0'));
+        }
+        return false;
+    }
+
+    /**
      * Check path has extension already or not
      *
      * @param string $path

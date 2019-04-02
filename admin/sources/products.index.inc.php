@@ -707,6 +707,7 @@ if (isset($_GET['action'])) {
         $GLOBALS['smarty']->assign("GOOGLE_CATS", $google_cats);
 
         $GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
+        $GLOBALS['smarty']->assign("REDIRECTS", $GLOBALS['seo']->getRedirects('prod', $_GET['product_id']));
 
         // Generate list of groups and values
         if (($groups = $GLOBALS['db']->select('CubeCart_option_group', false, false, array('priority'=>'ASC'))) !== false) {

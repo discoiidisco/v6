@@ -138,6 +138,7 @@ if (isset($_GET['action'])) {
     $GLOBALS['main']->addTabControl($lang['common']['general'], 'general');
     $GLOBALS['main']->addTabControl($lang['documents']['tab_content'], 'article');
     $GLOBALS['main']->addTabControl($lang['settings']['tab_seo'], 'seo');
+    $GLOBALS['smarty']->assign("REDIRECTS", $GLOBALS['seo']->getRedirects('doc', $_GET['doc_id']));
     if (strtolower($_GET['action']) == ('edit' || 'translate') && isset($_GET['doc_id']) && is_numeric($_GET['doc_id'])) {
 
         // Check to see if translation space is available

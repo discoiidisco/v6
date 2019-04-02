@@ -11,7 +11,7 @@
  *}
 <form action="{$VAL_SELF}" id="hook_form" method="post" enctype="multipart/form-data">
    <div id="redirects" class="tab_content">
-      <h3>{$LANG.settings.redirects}</h3>
+   <h3>{$LANG.settings.redirects}</h3>
       <table>
          <thead>
          <tr>
