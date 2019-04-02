@@ -45,11 +45,23 @@ if (Admin::getInstance()->permissions('settings', CC_PERM_EDIT)) {
         }
     }
 }
-if (Admin::getInstance()->permissions('settings', CC_PERM_DELETE)) {
-
+if (isset($_GET['delete']) && ctype_digit($_GET['delete']) && Admin::getInstance()->permissions('settings', CC_PERM_DELETE)) {
+    if($GLOBALS['db']->delete('CubeCart_seo_urls', array('id' => $_GET['delete']))) {
+        $GLOBALS['main']->successMessage($lang['notification']['notify_seo_url_deleted']);
+    } else {
+        $GLOBALS['main']->errorMessage($lang['notification']['notify_seo_url_not_deleted']);
+    }
+    httpredir(currentPage(array()));
 }
 $redirect_dataset = false;
-if($redirects =  $GLOBALS['db']->select('CubeCart_seo_urls', false, "`redirect` IN ('301', '302')")) {
+
+
+$page  = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$per_page = 100;
+
+if($redirects =  $GLOBALS['db']->select('CubeCart_seo_urls', false, "`redirect` IN ('301', '302')", false, $per_page, $page)) {
+    $total = $GLOBALS['db']->count('CubeCart_seo_urls', false, "`redirect` IN ('301', '302')");
+    $GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination($total, $per_page, $page));
     $redirect_dataset = array();
     foreach($redirects as $redirect) {
         $redirect['destination'] = $GLOBALS['seo']->getdbPath($redirect['type'], $redirect['item_id']);
@@ -57,5 +69,4 @@ if($redirects =  $GLOBALS['db']->select('CubeCart_seo_urls', false, "`redirect` 
     }
 }
 $GLOBALS['smarty']->assign('REDIRECTS', $redirect_dataset);
-
 $page_content = $GLOBALS['smarty']->fetch('templates/settings.redirects.php');

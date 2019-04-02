@@ -74,6 +74,7 @@
             {/foreach}
          </tbody>
       </table>
+      {$PAGINATION}
    </div>
    {include file='templates/element.hook_form_content.php'}
 </form>
