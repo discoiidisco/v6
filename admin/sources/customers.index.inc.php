@@ -100,6 +100,7 @@ if (isset($_POST['customer']) && is_array($_POST['customer']) && Admin::getInsta
         }
         $email_check = $GLOBALS['db']->select('CubeCart_customer', array('customer_id'), array('email' => $customer['email']));
         if($email_check && $email_check[0]['customer_id']!==$_POST['customer_id']) {
+            $GLOBALS['main']->errorMessage($lang['account']['error_email_in_use']);
             $customer_updated = false;
         } elseif (($GLOBALS['db']->update('CubeCart_customer', $customer, array('customer_id' => $_POST['customer_id']))) !== false) {
             $customer_updated = true;
@@ -113,14 +114,14 @@ if (isset($_POST['customer']) && is_array($_POST['customer']) && Admin::getInsta
             if ($field == 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
                 $GLOBALS['main']->errorMessage($lang['common']['error_email_invalid']);
                 $error = true;
-            }
-            if (in_array($field, $required) && empty($value)) {
+            } elseif($GLOBALS['db']->select('CubeCart_customer', array('customer_id'), array('email' => $customer['email']))) {
+                $GLOBALS['main']->errorMessage($lang['account']['error_email_in_use']);
                 $error = true;
             }
-        }
-        // Check email is not already in use!
-        if ($GLOBALS['db']->select('CubeCart_customer', array('customer_id'), array('email' => $customer['email']))) {
-            $error = true;
+            if (in_array($field, $required) && empty($value)) {
+                $GLOBALS['main']->errorMessage($lang['account']['error_customer_create_empty_fields']);
+                $error = true;
+            }
         }
 
         foreach ($GLOBALS['hooks']->load('admin.customer.add') as $hook) {
@@ -379,7 +380,7 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
             if (isset($_GET['address_id']) && is_numeric($_GET['address_id'])) {
                 if (($address = $GLOBALS['db']->select('CubeCart_addressbook', false, array('customer_id' => $customer_id, 'address_id' => (int)$_GET['address_id']))) !== false) {
                     $GLOBALS['gui']->addBreadcrumb($address[0]['description'], currentPage());
-                    if (($countries = $GLOBALS['db']->select('CubeCart_geo_country', array('id', 'numcode', 'name'))) !== false) {
+                    if (($countries = $GLOBALS['db']->select('CubeCart_geo_country', array('id', 'numcode', 'name'), false, array('name' => 'ASC'))) !== false) {
                         $smarty_data = array();
                         foreach ($countries as $country) {
                             $array = array(
@@ -541,7 +542,7 @@ if (isset($_GET['action']) && Admin::getInstance()->permissions('customers', CC_
 
 if (!isset($_GET['address_id'])): // avoid states double content by address edit
 
-    if (($countries = $GLOBALS['db']->select('CubeCart_geo_country', array('id', 'numcode', 'name'))) !== false) {
+    if (($countries = $GLOBALS['db']->select('CubeCart_geo_country', array('id', 'numcode', 'name'), false, array('name' => 'ASC'))) !== false) {
         $store_country = $GLOBALS['config']->get('config', 'store_country');
         foreach ($countries as $country) {
             $smarty_data['countries'][] = array(

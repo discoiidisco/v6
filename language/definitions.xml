@@ -890,13 +890,14 @@ This email is sent from the store's master email address but it is possible to r
     <string name="customer_export" introduced="5.0.0"><![CDATA[Customer Export]]></string>
     <string name="date_registered" introduced="5.0.0"><![CDATA[Date Registered]]></string>
     <string name="error_address_delete" introduced="5.0.0"><![CDATA[Failed to delete address.]]></string>
-    <string name="error_customer_create" introduced="5.0.0"><![CDATA[Failed to add customer. Please make sure first name, last name and email address are not empty and that the email address is not already in use.]]></string>
+    <string name="error_customer_create" introduced="5.0.0"><![CDATA[Failed to add customer.]]></string>
+    <string name="error_customer_create_empty_fields" introduced="6.2.6"><![CDATA[Please make sure first name, last name and email address are not empty.]]></string>
     <string name="error_customer_delete" introduced="5.0.0"><![CDATA[Failed to delete customer.]]></string>
     <string name="error_customer_delete_orders" introduced="5.0.0"><![CDATA[Customer can not be deleted, as they have placed orders.]]></string>
     <string name="error_customer_found" introduced="5.0.0"><![CDATA[That customer could not be found.]]></string>
     <string name="error_customer_matching_x" introduced="5.0.0"><![CDATA[No customers found matching '%s']]></string>
     <string name="error_customer_status" introduced="5.0.0"><![CDATA[Failed to update customer status.]]></string>
-    <string name="error_customer_update" introduced="5.0.0"><![CDATA[Failed to update customer. Please check the email address is not already in use with a different account.]]></string>
+    <string name="error_customer_update" introduced="5.0.0"><![CDATA[Failed to update customer.]]></string>
     <string name="error_groups_create" introduced="5.0.0"><![CDATA[Failed to create customer group.]]></string>
     <string name="error_groups_delete" introduced="5.0.0"><![CDATA[Failed to delete customer group.]]></string>
     <string name="error_groups_update" introduced="5.0.0"><![CDATA[Failed to update customer group.]]></string>
@@ -1032,6 +1033,8 @@ This email is sent from the store's master email address but it is possible to r
     <string name="title_documents" introduced="5.0.0"><![CDATA[Site Documents]]></string>
   </group>
   <group name="email">
+    <string name="exit_title" introduced="6.2.0"><![CDATA[Wait&hellip;]]></string>
+    <string name="exit_copy" introduced="6.2.0"><![CDATA[Before you go, be sure to sign up to our newsletter for exclusive offers and promotions!]]></string>
     <string name="customer_comments" introduced="6.2.0"><![CDATA[Customer comments]]></string>
     <string name="news_dbl_opt_only" introduced="6.2.0"><![CDATA[Send to double opt-in only]]></string>
     <string name="error_no_subject" introduced="6.0.3"><![CDATA[Please enter the newsletter subject.]]></string>
@@ -1840,6 +1843,7 @@ This email is sent from the store's master email address but it is possible to r
   </group>
   <group name="settings">
     <string name="redirects" introduced="6.3.0"><![CDATA[Redirects]]></string>
+    <string name="enable_exit_modal" introduced="6.2.6"><![CDATA[Enable exit modal newsletter signup]]></string>
     <string name="gdpr" introduced="6.2.0"><![CDATA[General Data Protection Regulation (GDPR)]]></string>
     <string name="dbl_opt" introduced="6.2.0"><![CDATA[Marketing Double Opt-In]]></string>
     <string name="reCAPTCHA_v2_na" introduced="6.1.6"><![CDATA[Warning: It doesn't look like your current skin is compatible with reCAPTCHA v2.]]></string>
@@ -2035,10 +2039,9 @@ This email is sent from the store's master email address but it is possible to r
     <string name="seo_htaccess_install" introduced="5.0.0"><![CDATA[Install .htaccess]]></string>
     <string name="seo_meta_behaviour" introduced="5.0.0"><![CDATA[Product, Category & Document Meta Data]]></string>
     <string name="seo_meta_description" introduced="5.0.0"><![CDATA[Meta Description]]></string>
-    <string name="seo_meta_keywords" introduced="5.0.0"><![CDATA[Meta Keywords]]></string>
-    <string name="seo_meta_option_disable" introduced="5.0.0"><![CDATA[Disabled (Use global meta data only)]]></string>
-    <string name="seo_meta_option_merge" introduced="5.0.0"><![CDATA[Merge with global meta data (Recommended)]]></string>
-    <string name="seo_meta_option_replace" introduced="5.0.0"><![CDATA[Replace global meta data]]></string>
+    <string name="seo_meta_option_disable" introduced="5.0.0"><![CDATA[Disabled - Use global metadata only]]></string>
+    <string name="seo_meta_option_merge" introduced="5.0.0"><![CDATA[Enabled - Merge with global metadata]]></string>
+    <string name="seo_meta_option_replace" introduced="5.0.0"><![CDATA[Enabled - Do not merge with global metadata (Recommended)]]></string>
     <string name="seo_meta_title" introduced="5.0.0"><![CDATA[Meta Title]]></string>
     <string name="seo_method_lookback" introduced="5.0.0"><![CDATA[Apache directory lookback]]></string>
     <string name="seo_method_rewrite" introduced="5.0.0"><![CDATA[Apache RewriteRule (Recommended)]]></string>

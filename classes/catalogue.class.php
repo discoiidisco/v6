@@ -264,7 +264,6 @@ class Catalogue
                 'name'   => (isset($catData['cat_name'])) ? $catData['cat_name'] : '',
                 'path'   => null,
                 'description' => (isset($catData['seo_meta_description'])) ? $catData['seo_meta_description'] : '',
-                'keywords'  => (isset($catData['seo_meta_keywords'])) ? $catData['seo_meta_keywords'] : '',
                 'title'   => (isset($catData['seo_meta_title'])) ? $catData['seo_meta_title'] : '',
             );
             $GLOBALS['seo']->set_meta_data($meta_data);
@@ -331,7 +330,6 @@ class Catalogue
                     'name'   => $product['name'],
                     'path'   => null,
                     'description' => $product['seo_meta_description'],
-                    'keywords'  => $product['seo_meta_keywords'],
                     'title'   => $product['seo_meta_title'],
                 );
                 $GLOBALS['seo']->set_meta_data($meta_data);
@@ -578,7 +576,7 @@ class Catalogue
                             } else {
                                 if ($option[0]['option_price']>0 && $option[0]['option_negative'] == 0) {
                                     $this->_options_line_price +=  $option[0]['option_price'];
-                                } elseif ($value['option_price']>0) {
+                                } elseif ($option[0]['option_price']>0) {
                                     $this->_options_line_price -=  $option[0]['option_price'];
                                 }
                             }
@@ -1330,6 +1328,7 @@ class Catalogue
                         if (!$sale || ((double)$product_data['sale_price'] == 0) || ($sale && $product_data['sale_price'] > $price)) {
                             $product_data['price'] = $price;
                             $product_data['sale_price'] = $price;
+                            $product_data['price_to_pay'] = $price;
                         }
                         break;
                     }
@@ -1611,7 +1610,7 @@ class Catalogue
         if ($product_view) {
             // Price by quantity
             $user = (array)$GLOBALS['user']->get();
-            if (isset($user['customer_id']) && ($memberships = $GLOBALS['db']->select('CubeCart_customer_membership', array('group_id'), array('customer_id' => (int)$user['customer_id']))) !== false) {
+            if (($memberships = $GLOBALS['user']->getMemberships()) !== false) {
                 foreach ($memberships as $membership) {
                     $group_id[] = $membership['group_id'];
                 }
@@ -1708,7 +1707,7 @@ class Catalogue
         }
         $user = (array)$GLOBALS['user']->get();
         $group_id = 'WHERE group_id = 0';
-        if (isset($user['customer_id']) && ($memberships = $GLOBALS['db']->select('CubeCart_customer_membership', array('group_id'), array('customer_id' => (int)$user['customer_id']))) !== false) {
+        if (($memberships = $GLOBALS['user']->getMemberships()) !== false) {
             $group_id = 'WHERE ';
             foreach ($memberships as $membership) {
                 $group_id .= 'group_id = '.$membership['group_id'].' OR ';
@@ -1833,17 +1832,14 @@ class Catalogue
             }
 
             if (isset($search_data['featured'])) {
-                $where[] = "I.featured = '1'";
+                $where[] = "AND I.featured = '1'";
             }
             // Only look for items that are in stock
             if (isset($search_data['inStock'])) {
                 $where[] = $this->outOfStockWhere();
             }
 
-            $whereString = (isset($where) && is_array($where)) ? implode(' AND ', $where) : '';
-            if (!empty($whereString)) {
-                $whereString = ' AND '.$whereString;
-            }
+            $whereString = (isset($where) && is_array($where)) ? implode(' ', $where) : '';
             $whereString .= $this->_where_live_from;
 
             $joinString = (isset($joins) && is_array($joins)) ? implode(' JOIN ', $joins) : '';
@@ -1898,7 +1894,7 @@ class Catalogue
                         $this->_category_count  = (int)count($count);
                         $this->_category_products = $search;
                         $this->_sort_by_relevance = true;
-                        if (count($this->_category_products)==1 && ctype_digit($this->_category_products[0]['product_id'])) {
+                        if (count($this->_category_products)==1 && ctype_digit($this->_category_products[0]['product_id']) && $_SERVER['HTTP_X_REQUESTED_WITH']!=='XMLHttpRequest') {
                             $GLOBALS['gui']->setNotify(sprintf($GLOBALS['language']->catalogue['notify_product_search_one'], $_REQUEST['search']['keywords']));
                             httpredir('?_a=product&product_id='.$this->_category_products[0]['product_id']);
                         }
@@ -1912,6 +1908,7 @@ class Catalogue
                     $like = '';
                     if (!empty($search_data['keywords'])) {
                         $searchwords = preg_split('/[\s,]+/', $GLOBALS['db']->sqlSafe($search_data['keywords']));
+                        $searchArray = array();
                         foreach ($searchwords as $word) {
                             if (empty($word) && !is_numeric($word)) {
                                 continue;
@@ -1954,7 +1951,7 @@ class Catalogue
                         $count = $GLOBALS['db']->query($q2);
                         $this->_category_count  = (int)count($count);
                         $this->_category_products = $search;
-                        if (count($this->_category_products)==1 && ctype_digit($this->_category_products[0]['product_id'])) {
+                        if (count($this->_category_products)==1 && ctype_digit($this->_category_products[0]['product_id']) && $_SERVER['HTTP_X_REQUESTED_WITH']!=='XMLHttpRequest') {
                             $GLOBALS['gui']->setNotify(sprintf($GLOBALS['language']->catalogue['notify_product_search_one'], $_REQUEST['search']['keywords']));
                             httpredir('?_a=product&product_id='.$this->_category_products[0]['product_id']);
                         }

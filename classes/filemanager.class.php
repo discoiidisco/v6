@@ -55,7 +55,7 @@ class FileManager
         $this->_sub_dir  = ($sub_dir) ? $this->formatPath($sub_dir) : null;
 
         //Auto-handler: Create Directory
-        if (isset($_POST['fm']['create-dir']) && !empty($_POST['fm']['create-dir'])) {
+        if (isset($_POST['fm']['create-dir']) && $_POST['fm']['create-dir']!=='') {
             if ($create = $this->createDirectory($_POST['fm']['create-dir'])) {
                 $GLOBALS['gui']->setNotify($GLOBALS['language']->filemanager['success_create_folder']);
             } else {
@@ -358,6 +358,26 @@ class FileManager
         }
         return array();
     }
+    
+    /**
+     * Get unique assigned image info
+     *
+     * @param string $id (of image)
+     * @return array
+     */
+    public function uniqueImage($id)
+    {       
+        if ($GLOBALS['session']->has('recently_uploaded')) {
+            $assigned_images = $GLOBALS['session']->get('recently_uploaded');
+            end($assigned_images); // Set last image as selected
+            $key = key($assigned_images);
+            $GLOBALS['session']->delete('recently_uploaded');
+            $this->form_fields = true;
+            return array($key => '1');
+        } else {
+            return array($id => 1);
+        }
+    }
 
     /**
      * Create folder
@@ -365,9 +385,9 @@ class FileManager
      * @param string $new_dir
      * @return bool
      */
-    private function createDirectory($new_dir = false)
+    private function createDirectory($new_dir = '')
     {
-        if (!empty($new_dir)) {
+        if ($new_dir !== '') {
             $create = $this->formatName($new_dir);
             $path = $this->_manage_root.'/'.$this->_sub_dir.$create;
             if (!file_exists($path)) {
@@ -659,10 +679,10 @@ class FileManager
      *
      * @return string/false
      */
-    public function findDirectories($search_dir = false, $i = 0)
+    public function findDirectories($search_dir = '', $i = 0)
     {
-        $search_dir = (!$search_dir) ? $this->_manage_dir : $search_dir;
-        if ($search_dir && file_exists($search_dir)) {
+        $search_dir = ($search_dir==='') ? $this->_manage_dir : $search_dir;
+        if (file_exists($search_dir)) {
             $list = glob($search_dir.'/'.'*', GLOB_ONLYDIR);
             if (is_array($list) && count($list)>0) {
                 foreach ($list as $dir) {
@@ -782,7 +802,7 @@ class FileManager
                 return $data;
             }
         } else {
-            if (filter_var($product[0]['digital_path'], FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
+            if (filter_var($product[0]['digital_path'], FILTER_VALIDATE_URL)) {
                 $data = array(
                     'mimetype' => 'application/octet-stream',
                     'filename' => basename($product[0]['digital_path']),
@@ -1115,6 +1135,9 @@ class FileManager
                     }
                     if (isset($_GET['cat_id']) && $_GET['cat_id']>0) {
                         $this->_assignCategory((int)$_GET['cat_id'], (int)$fid);
+                    }
+                    if (isset($_GET['gc']) && $_GET['gc']==1) {
+                        $GLOBALS['config']->set('gift_certs', 'image', (int)$fid);
                     }
                     move_uploaded_file($file['tmp_name'], $target);
                     foreach ($GLOBALS['hooks']->load('class.filemanager.upload') as $hook) include $hook;

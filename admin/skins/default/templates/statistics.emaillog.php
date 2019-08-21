@@ -30,20 +30,20 @@
 	  <tr>
 	  	<td align="center">{if $log.result==1}<i class="fa fa-check" title="{$LANG.common.yes}"></i>{else}<i class="fa fa-times" title="{$LANG.common.no}"></i>{/if}</td>
 		<td>{$log.subject}</td>
-		<td>{foreach from=$log.to item=email}
-			<a href="?_g=customers&q={$email}" title="{$LANG.search.title_search_customers}">{$email}</a><br>
+		<td>{foreach from=$log.to_email item=to}
+			<a href="?_g=customers&q={$to.email}" title="{$LANG.search.title_search_customers}">{$to.name}</a><br>
 		{/foreach}</td>
 		<td>
-			<a href="?_g=customers&q={$log.from}" title="{$LANG.search.title_search_customers}">{$log.from}</a><br>
+			<a href="?_g=customers&q={$log.from_email}" title="{$LANG.search.title_search_customers}">{$log.from}</a><br>
 		</td>
 		<td>
 			{if !empty($log.content_html)}
-			<a href="#" onclick="{literal}$.colorbox({title:'{/literal}{$log.subject|escape:'javascript'} ({$LANG.common.html}){literal}',width:'90%', height:'90%', html:'<iframe width=\'100%\' height=\'95%\' frameBorder=\'0\' src=\'?_g=xml&amp;function=viewEmail&amp;id={/literal}{$log.id}{literal}&amp;mode=content_html\'></iframe>'}){/literal}">{$LANG.common.html}</a>
+			<a href="#" onclick="{literal}$.colorbox({title:'{/literal}{htmlentities($log.subject)} ({$LANG.common.html}){literal}',width:'90%', height:'90%', html:'<iframe width=\'100%\' height=\'95%\' frameBorder=\'0\' src=\'?_g=xml&amp;function=viewEmail&amp;id={/literal}{$log.id}{literal}&amp;mode=content_html\'></iframe>'}){/literal}">{$LANG.common.html}</a>
 			{/if}
 		</td>
 		<td>
 			{if !empty($log.content_text)}
-			<a href="#" onclick="{literal}$.colorbox({title:'{/literal}{$log.subject|escape:'javascript'} ({$LANG.common.plain_text}){literal}',width:'90%', height:'90%', html:'<iframe width=\'100%\' height=\'95%\' frameBorder=\'0\' src=\'?_g=xml&amp;function=viewEmail&amp;id={/literal}{$log.id}{literal}&amp;mode=content_text\'></iframe>'}){/literal}">{$LANG.common.plain_text}</a>
+			<a href="#" onclick="{literal}$.colorbox({title:'{/literal}{htmlentities($log.subject)} ({$LANG.common.plain_text}){literal}',width:'90%', height:'90%', html:'<iframe width=\'100%\' height=\'95%\' frameBorder=\'0\' src=\'?_g=xml&amp;function=viewEmail&amp;id={/literal}{$log.id}{literal}&amp;mode=content_text\'></iframe>'}){/literal}">{$LANG.common.plain_text}</a>
 			{/if}
 		</td>
 		<td>{$log.date}</td>

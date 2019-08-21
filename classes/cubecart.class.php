@@ -181,7 +181,6 @@ class Cubecart
                     'name'   => $contents['doc_name'],
                     'path'   => null,
                     'description' => $contents['seo_meta_description'],
-                    'keywords'  => $contents['seo_meta_keywords'],
                     'title'   => $contents['seo_meta_title'],
                 );
 
@@ -450,7 +449,7 @@ class Cubecart
                         include $hook;
                     }
             }
-            if (get_class($GLOBALS['smarty']->getVariable('PAGE_CONTENT')) == 'Smarty_Undefined_Variable') {
+            if ($GLOBALS['smarty']->getTemplateVars('PAGE_CONTENT') === null) {
                 $this->_404();
             }
         } else {
@@ -1504,8 +1503,10 @@ class Cubecart
                     // Load content, assign variables
                     $mailer->IsHTML(false);
                     $mailer->AddAddress($email, $department);
+                    $from_name = strip_tags($_POST['contact']['name']);
+                    $from_email = $_POST['contact']['email'];
                     if (isset($_POST['contact']['cc'])) {
-                        $mailer->AddAddress($_POST['contact']['email'], strip_tags($_POST['contact']['name']));
+                        $mailer->AddAddress($from_email, $from_name);
                     }
                     $mailer->addReplyTo($_POST['contact']['email'], strip_tags($_POST['contact']['name']));
                     $mailer->Subject = html_entity_decode(strip_tags($_POST['contact']['subject']), ENT_QUOTES);
@@ -1519,8 +1520,8 @@ class Cubecart
                         'subject' => $mailer->Subject,
                         'content_html' => '',
                         'content_text' => $mailer->Body,
-                        'to' => $email,
-                        'from' => $_POST['contact']['email'],
+                        'to' => "$department <$email>",
+                        'from' => "$from_name <$from_email",
                         'result' => $email_sent,
                         'email_content_id' => ''
                     );
@@ -1537,7 +1538,9 @@ class Cubecart
             // Display form
             $contact['description'] = base64_decode($contact['description']);
             $contact['description'] = ($contact['parse']=='1') ? $GLOBALS['smarty']->fetch('string:'.$contact['description']) : $contact['description'];
-
+            if (!isset($_POST['contact']) && $GLOBALS['user']->is()) {
+                $GLOBALS['smarty']->assign('MESSAGE', array('name' => $GLOBALS['user']->get('first_name').' '.$GLOBALS['user']->get('last_name'), 'email' => $GLOBALS['user']->get('email')));
+            }
             $GLOBALS['smarty']->assign('CONTACT', $contact);
             if (isset($contact['department']) && is_array($contact['department'])) {
                 foreach ($contact['department'] as $key => $dept) {
@@ -1756,7 +1759,7 @@ class Cubecart
                 // for them if they haven't chosen already
                 if ((!isset($this->_basket['shipping']) && !$digital_only) || (!$offset_matched && isset($this->_basket['shipping']['offset']) && !$digital_only)) {
                     foreach ($shipping_values as $value) {
-                        if (!isset($cheapest['value']) || $value['value'] < $cheapest['value']) {
+                        if (!isset($cheapest) || $value['value'] < $cheapest) {
                             $cheapest = $value;
                         }
                     }
@@ -2073,7 +2076,7 @@ class Cubecart
                 $GLOBALS['smarty']->assign('PAGINATION', $GLOBALS['db']->pagination($GLOBALS['db']->getFoundRows(), $per_page, $page, 5, $var_name = 'p'));
                 $GLOBALS['smarty']->assign('MAX_DOWNLOADS', (int)$GLOBALS['config']->get('config', 'download_count'));
                 foreach ($downloads as $download) {
-                    if (($product = $GLOBALS['db']->select('`'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_inventory` INNER JOIN `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_summary` ON `CubeCart_order_inventory`.`cart_order_id` = `CubeCart_order_summary`.`cart_order_id`', '`'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_inventory`.*, `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_summary`.`status`', array('id' => $download['order_inv_id']))) !== false) {
+                    if (($product = $GLOBALS['db']->select('`'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_inventory` INNER JOIN `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_summary` ON `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_inventory`.`cart_order_id` = `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_summary`.`cart_order_id`', '`'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_inventory`.*, `'.$GLOBALS['config']->get('config', 'dbprefix').'CubeCart_order_summary`.`status`', array('id' => $download['order_inv_id']))) !== false) {
                         $download['file_info'] = $filemanager->getFileInfo($download['product_id']);
                         $download['expires'] = ($download['expire'] > 0) ? formatTime($download['expire']) : $GLOBALS['language']->common['never'];
                         $download['active'] = (!in_array($product[0]['status'],array(2,3)) || $download['expire'] > 0 && $download['expire'] < time() || (int)$download['downloads'] >= $GLOBALS['config']->get('config', 'download_count') && $GLOBALS['config']->get('config', 'download_count') > 0) ? false : true;

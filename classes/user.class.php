@@ -414,6 +414,7 @@ class User
                     $data['customer_id']  = $customer_id;
                 }
                 $customer_id = $GLOBALS['db']->insert('CubeCart_customer', $data);
+                if($type==2) $this->setGhostId($customer_id);
             }
             if ($login) {
                 // Automatically log 'em in
@@ -523,6 +524,29 @@ class User
             //Send all the user data
             return $this->_user_data;
         }
+    }
+
+    /**
+     * Convert John Smith <john.smith@example.org> to array of parts
+     *
+     * @param string $input
+     * @return false/array
+     */
+    public static function getEmailAddressParts($input)
+    {
+        if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            $email = $input;
+            $name = $input;
+        } else {
+            preg_match('#\<(.*?)\>#', $input, $match);
+            if(filter_var($match[1], FILTER_VALIDATE_EMAIL)) {
+                $email = $match[1];
+                $name = trim(strip_tags($input));
+            } else {
+                return false;
+            }
+        }
+        return array('name' => $name, 'email' => $email);
     }
 
     /**
@@ -935,7 +959,7 @@ class User
 
             $array['hash'] = md5($hash_values);
 
-            if ($result = $GLOBALS['db']->select('CubeCart_addressbook', array('address_id'), array('hash' => $array['hash']), false, 1, false, false)) {
+            if ($result = $GLOBALS['db']->select('CubeCart_addressbook', array('address_id'), array('hash' => $array['hash'], 'customer_id' => $user_id), false, 1, false, false)) {
                 $array['address_id'] = $result[0]['address_id'];
             }
 

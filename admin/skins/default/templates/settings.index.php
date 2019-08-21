@@ -144,6 +144,10 @@
          </div>
       </fieldset>
       <fieldset>
+         <legend>{$LANG.navigation.nav_subscribers}</legend>
+         <div><label for="exit_modal">{$LANG.settings.enable_exit_modal}</label><span><input name="config[exit_modal]" id="exit_modal" type="hidden" class="toggle" value="{$CONFIG.exit_modal}"></span></div>
+      </fieldset>
+      <fieldset>
          <legend>{$LANG.common.misc}</legend>
          <div><label for="admin_notify_status">{$LANG.settings.admin_order_status_notification}</label><span><select name="config[admin_notify_status]" id="admin_notify_status" class="textbox">
             {foreach from=$OPT_ADMIN_NOTIFY_STATUS item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
@@ -288,7 +292,6 @@
          <legend>{$LANG.settings.title_seo_global_meta_data}</legend>
          <div><label for="store_title">{$LANG.settings.seo_browser_title}</label><span><input name="config[store_title]" id="store_title" type="text" class="textbox" value="{$CONFIG.store_title}"></span></div>
          <div><label for="store_meta_description">{$LANG.settings.seo_meta_description}</label><span><textarea name="config[store_meta_description]" id="store_meta_description" class="textbox">{$CONFIG.store_meta_description}</textarea></span></div>
-         <div><label for="store_meta_keywords">{$LANG.settings.seo_meta_keywords}</label><span><textarea name="config[store_meta_keywords]" id="store_meta_keywords" class="textbox">{$CONFIG.store_meta_keywords}</textarea></span></div>
          <div><label for="seo_add_cats">{$LANG.settings.seo_add_cats}</label><span>
          <select name="config[seo_add_cats]" id="seo_add_cats" class="textbox">
             {foreach from=$OPT_SEO_ADD_CATS item=option}<option value="{$option.value}"{$option.selected}>{$option.title}</option>{/foreach}
@@ -515,6 +518,6 @@
    
 </form>
 <script type="text/javascript">
-   {if $VAL_JSON_COUNTY} var county_list = {$VAL_JSON_COUNTY};{/if}
+   var county_list = {if !empty($VAL_JSON_COUNTY)}{$VAL_JSON_COUNTY}{else}false{/if};
    {if $JSON_STYLES}var json_skins	= {$JSON_STYLES};{/if}
 </script>

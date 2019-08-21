@@ -116,5 +116,6 @@
       </div>
       {include file='templates/modal.exit.php'}
       {include file='templates/element.markup.json-ld.php'}
+      {include file='templates/modal.exit.php'}
    </body>
 </html>

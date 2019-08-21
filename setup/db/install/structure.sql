@@ -133,7 +133,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_category` (
 	`hide` SMALLINT(1) NOT NULL DEFAULT '0',
 	`seo_meta_title` TEXT NOT NULL,
 	`seo_meta_description` TEXT NOT NULL,
-	`seo_meta_keywords` TEXT NOT NULL,
 	`priority` SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',
 	`status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 	PRIMARY KEY (`cat_id`),
@@ -158,7 +157,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_category_language` (
 	`cat_desc` TEXT NOT NULL,
 	`seo_meta_title` TEXT NULL,
 	`seo_meta_description` TEXT NULL,
-	`seo_meta_keywords` TEXT NULL,
 	PRIMARY KEY `translation_id` (`translation_id`),
 	KEY `cat_id` (`cat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
@@ -280,7 +278,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_documents` (
 	`doc_url_openin` TINYINT(1) UNSIGNED DEFAULT NULL,
 	`seo_meta_title` TEXT NOT NULL,
 	`seo_meta_description` TEXT NOT NULL,
-	`seo_meta_keywords` TEXT NOT NULL,
 	`navigation_link` tinyint(1) unsigned NOT NULL DEFAULT '1',
 	`doc_parse` tinyint(1) NOT NULL DEFAULT '0',
 	`hide_title` enum('0','1') COLLATE utf8_unicode_ci DEFAULT '0',
@@ -421,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `CubeCart_inventory` (
   `cat_id` int(10) unsigned DEFAULT '0' COMMENT 'Main Category ID',
   `popularity` int(10) unsigned DEFAULT '0' COMMENT 'Popularity',
   `stock_level` int(11) DEFAULT '0' COMMENT 'Main Stock Level',
-  `stock_warning` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Main Stock Warning level',
+  `stock_warning` int(10) NOT NULL DEFAULT '0' COMMENT 'Main Stock Warning level',
   `use_stock_level` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'Use Stock Control',
   `digital` int(4) unsigned NOT NULL DEFAULT '0' COMMENT 'Is Digital?',
   `digital_path` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Digital Path',
@@ -436,7 +433,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_inventory` (
   `latest` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT 'Included on Homepage',
   `seo_meta_title` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'SEO Meta Title',
   `seo_meta_description` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'SEO Meta Description',
-  `seo_meta_keywords` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'SEO Meta Keywords',
   `upc` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'UPC Code',
   `ean` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'EAN Code',
   `jan` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'JAN Code',
@@ -467,7 +463,6 @@ CREATE TABLE IF NOT EXISTS `CubeCart_inventory_language` (
 	`description` TEXT NOT NULL,
 	`seo_meta_title` TEXT NOT NULL,
 	`seo_meta_description` TEXT NOT NULL,
-	`seo_meta_keywords` TEXT NOT NULL,
 	PRIMARY KEY `translation_id` (`translation_id`),
 	FULLTEXT KEY `fulltext` (`name`,`description`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
