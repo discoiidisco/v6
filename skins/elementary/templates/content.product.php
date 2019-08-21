@@ -99,6 +99,12 @@
                      <td>{floatval($PRODUCT.product_depth)}{if $PRODUCT.dimension_unit=='in'}&#8243;{else}{$PRODUCT.dimension_unit}{/if}</td>
                   </tr>
                   {/if}
+                  {if $PRODUCT.digital > 0}
+                  <tr>
+                     <td>{$LANG.catalogue.product_type_digital}</td>
+                     <td>{$LANG.common.download}</td>
+                  </tr>
+                  {/if}
                </tbody>
             </table>
          </div>
@@ -116,7 +122,7 @@
                <tbody>
                   <tr>
                      <td class="text-center">1</td>
-                     <td class="text-center">{$PRODUCT.price}</td>
+                     <td class="text-center">{if $PRODUCT.ctrl_sale}{$PRODUCT.sale_price}{else}{$PRODUCT.price}{/if}</td>
                   </tr>
                   {foreach from=$PRODUCT.discounts item=discount}
                   <tr>

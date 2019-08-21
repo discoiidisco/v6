@@ -68,11 +68,7 @@
                   <div class="hide" id="val_lang_back">{$LANG.common.back}</div>
                </div>
             </div>
-            <div class="row">
-               <div class="small-12 columns small-collapse">
-                  {include file='templates/element.breadcrumb.php'} 
-               </div>
-            </div>
+            {include file='templates/element.breadcrumb.php'}   
             <div class="row {$SECTION_NAME}_wrapper">
                <div class="small-12 columns" id="main_content">
                   {include file='templates/box.errors.php'}
@@ -118,6 +114,7 @@
             <a class="exit-off-canvas"></a>
          </div>
       </div>
+      {include file='templates/modal.exit.php'}
       {include file='templates/element.markup.json-ld.php'}
    </body>
 </html>
