@@ -559,6 +559,8 @@ if (isset($_GET['action'])) {
         foreach ($summaries as $key => $summary) {
             $summary['raw'] = $summary;
             $GLOBALS['smarty']->assign('PAGE_TITLE', (count($_GET['print'])>1) ? $lang['orders']['title_invoices'] : sprintf($lang['orders']['title_invoice_x'], $summary['cart_order_id']));
+            //mark as printed
+            $GLOBALS['db']->update('CubeCart_order_summary', array('printed' => 1), array('cart_order_id' => $summary['cart_order_id']));
             if (($inventory = $GLOBALS['db']->select('CubeCart_order_inventory', false, array('cart_order_id' => $summary['cart_order_id']))) !== false) {
                 foreach ($inventory as $item) {
                     $item['raw'] = $item;
@@ -749,6 +751,10 @@ if (isset($_GET['action'])) {
             if (isset($_GET['search']['status']) && is_numeric($_GET['search']['status'])) {
                 $where['status'] = (int)$_GET['search']['status'];
             }
+            // Printed
+			if (isset($_GET['search']['printed']) && is_numeric($_GET['search']['printed'])) {
+				$where['printed'] = (int)$_GET['search']['printed'];
+			}
             // Customer ID
             if (isset($_GET['search']['search_customer_id']) && is_numeric($_GET['search']['search_customer_id'])) {
                 $where['customer_id'] = (int)$_GET['search']['search_customer_id'];
