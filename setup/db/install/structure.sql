@@ -743,13 +743,15 @@ CREATE TABLE IF NOT EXISTS `CubeCart_order_summary` (
 	`note_to_customer` TEXT,
 	`custom_oid` varchar(50) DEFAULT NULL,
 	`currency` varchar(3) DEFAULT '',
+	`printed` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `cart_order_id` (`cart_order_id`),
 	UNIQUE KEY `custom_oid` (`custom_oid`),
 	KEY `customer_id` (`customer_id`),
 	KEY `status` (`status`),
 	KEY `email` (`email`),
-	KEY `order_date` (`order_date`)
+	KEY `order_date` (`order_date`),
+	KEY `printed` (`printed`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; #EOQ
 
 CREATE TABLE IF NOT EXISTS `CubeCart_order_tax` (
